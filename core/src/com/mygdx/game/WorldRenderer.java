@@ -5,7 +5,7 @@ package com.mygdx.game;
  */
 public class WorldRenderer {
 
-    public void render(double dt){
+    public void render(){
 
         renderBackground();
         renderObjects();

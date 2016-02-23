@@ -26,6 +26,7 @@ public class GameScreen extends ScreenAdapter {
         render.render();
     }
     private void update(){
-        update.update();
+
+        //update.update();
     }
 }
