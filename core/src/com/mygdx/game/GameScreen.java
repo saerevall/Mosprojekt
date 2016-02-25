@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector2;
@@ -16,15 +18,18 @@ public class GameScreen extends ScreenAdapter {
     Ballgame game;
     WorldRenderer renderer;
     WorldUpdate update;
-    Vector3 tp;
+    Vector3 touchDown, touchUp, result;
+    Vector2 newPos, oldPos, diffPos;
     public GameScreen(Ballgame game) {
 
         this.game = game;
         update = new WorldUpdate();
         renderer = new WorldRenderer(update, game.batch);
-        tp = new Vector3();
+        result = new Vector3();
+        touchDown = new Vector3();
+        touchUp = new Vector3();
     }
-    public void render(float delta) {
+    public void render(float dedlta) {
 
         update(delta);
         draw();
@@ -33,11 +38,35 @@ public class GameScreen extends ScreenAdapter {
         renderer.render();
     }
     private void update(float delta){
-        if(Gdx.input.justTouched()){
+        Gdx.input.setInputProcessor(new InputAdapter() {
+            @Override
+            public boolean touchDown (int x, int y, int pointer, int button) {
+                // your touch down code here
+                touchDown.set(x, Gdx.graphics.getHeight() - y, 0);
+
+                return true; // return true to indicate the event was handled
+            }
+
+            @Override
+            public boolean touchUp (int x, int y, int pointer, int button) {
+                // your touch up code here
+                touchUp.set(x, Gdx.graphics.getHeight() - y, 0);
+                result = touchUp.sub(touchDown);
+                diffPos = new Vector2(result.x, result.y);
+                oldPos = update.ball.getPos();
+                newPos = oldPos.add(diffPos);
+                update.ball.setPos(newPos);
+
+                return true; // return true to indicate the event was handled
+            }
+
+
+        });
+        /*if(Gdx.input.justTouched()){
             tp.set(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY(), 0);
             Vector2 boll = new Vector2(tp.x, tp.y);
             update.ball.setPos(boll);
-        }
+        }*/
         update.update(delta);
     }
 }
