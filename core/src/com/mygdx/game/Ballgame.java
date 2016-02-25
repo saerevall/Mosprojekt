@@ -14,11 +14,7 @@ public class Ballgame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-<<<<<<< HEAD
-		img = new Texture("love.jpg");
-=======
 		Assets.load();
->>>>>>> 56701a28966d81a6683d1e166afcd74e9b868525
 		this.setScreen(new GameScreen(this));
 
 	}
