@@ -23,8 +23,8 @@ public class Assets {
 
     public static void load(){
 
-        background = loadTexture("android/assets/love.jpg");
-        ball = loadTexture("android/assets/badlogic.jpg");
+        background = loadTexture("love.jpg");
+        ball = loadTexture("badlogic.jpg");
 
     }
 }
