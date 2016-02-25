@@ -10,12 +10,12 @@ import com.badlogic.gdx.ScreenAdapter;
 public class GameScreen extends ScreenAdapter {
 
     Ballgame game;
-    WorldRenderer render;
+    WorldRenderer renderer;
     WorldUpdate update;
     public GameScreen(Ballgame game) {
 
         this.game = game;
-        render = new WorldRenderer();
+        renderer = new WorldRenderer();
         update = new WorldUpdate();
     }
     public void render(){
@@ -23,7 +23,7 @@ public class GameScreen extends ScreenAdapter {
         draw();
     }
     private void draw(){
-        render.render();
+        renderer.render();
     }
     private void update(){
 
