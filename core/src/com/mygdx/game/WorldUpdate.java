@@ -5,13 +5,19 @@ package com.mygdx.game;
  */
 public class WorldUpdate {
 
-    public void update(double dt){
+    public final Ball ball;
+
+    public WorldUpdate(){
+        this.ball = new Ball(0,0,2);
+    }
+
+    public void update(float dt){
         updateBall(dt);
         updateObstacles(dt);
         updateSolids(dt);
     }
-    private void updateBall(double dt){
-
+    private void updateBall(float dt){
+        ball.update(dt);
     }
     private void updateObstacles(double dt){
 

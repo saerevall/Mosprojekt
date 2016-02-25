@@ -15,11 +15,13 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(Ballgame game) {
 
         this.game = game;
-        renderer = new WorldRenderer();
         update = new WorldUpdate();
+        renderer = new WorldRenderer(update, game.batch);
+
     }
-    public void render(){
-        update();
+    public void render(float delta) {
+
+        update.update(delta);
         draw();
     }
     private void draw(){
