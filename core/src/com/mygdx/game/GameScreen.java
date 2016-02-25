@@ -34,8 +34,8 @@ public class GameScreen extends ScreenAdapter {
     }
     private void update(float delta){
         if(Gdx.input.justTouched()){
-            tp.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            Vector2 boll = new Vector2(tp.x,Gdx.graphics.getHeight() - tp.y);
+            tp.set(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY(), 0);
+            Vector2 boll = new Vector2(tp.x, tp.y);
             update.ball.setPos(boll);
         }
         update.update(delta);
