@@ -11,8 +11,6 @@ import com.badlogic.gdx.Game;
 public class Ballgame extends Game {
 	SpriteBatch batch;
 
-
-
 	@Override
 	public void create () {
 		batch = new SpriteBatch();

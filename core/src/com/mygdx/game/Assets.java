@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 /**
  * Created by Cricka on 2/25/2016.
  */
+
 public class Assets {
 
     public static Texture ball;
@@ -16,5 +17,6 @@ public class Assets {
 
     public static void load(){
         ball = loadTexture("badlogic.jpg");
+
     }
 }
