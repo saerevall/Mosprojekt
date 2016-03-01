@@ -1,14 +1,18 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * Created by Cricka on 2/23/2016.
  */
 public class WorldUpdate {
 
     public final Ball ball;
+    public static final Vector2 gravity;
 
     public WorldUpdate(){
         this.ball = new Ball(0,0,2);
+        gravity = new Vector2(0, 0);
     }
 
     public void update(float dt){

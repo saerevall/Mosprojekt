@@ -29,7 +29,7 @@ public class GameScreen extends ScreenAdapter {
         touchDown = new Vector3();
         touchUp = new Vector3();
     }
-    public void render(float dedlta) {
+    public void render(float delta) {
 
         update(delta);
         draw();
