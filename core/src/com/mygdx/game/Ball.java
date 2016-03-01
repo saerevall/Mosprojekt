@@ -7,6 +7,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Circle;
 
+<<<<<<< HEAD
 
 public class Ball {
 
@@ -16,10 +17,24 @@ public class Ball {
     public final Circle bounds;
     public Ball(float x, float y, float rad){
 
-            this.pos = new Vector2(x, y);
             this.bounds = new Circle(x, y, rad);
             this.acc = new Vector2(0, 0);
             this.vel = new Vector2(0,0);
+
+public class Ball extends GameObject {
+
+    //public final Vector2 vel;
+    //public final Vector2 accel;
+    public final Circle bounds;
+    public static final float RADIUS = 2;
+
+
+
+    public Ball(float x, float y){
+
+            super(x,y);
+            this.bounds = new Circle(x, y, RADIUS);
+
 
     }
     public void update(float dt){
@@ -31,7 +46,7 @@ public class Ball {
     }
 
     public void setPos(Vector2 pos) {
-        this.pos = pos;
+        position = pos;
     }
 
 //    public void setAcc(Vector2 Acc) {
@@ -45,7 +60,9 @@ public class Ball {
 
     public Vector2 getPos(){
 
-        return pos;
+
+        return position;
+
     }
 
 
