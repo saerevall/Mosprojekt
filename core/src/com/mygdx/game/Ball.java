@@ -11,7 +11,6 @@ public class Ball extends GameObject{
 
     //public final Vector2 vel;
     //public final Vector2 accel;
-    public Vector2 pos;
     public final Circle bounds;
     public static final float Radius = 2;
 
@@ -19,8 +18,6 @@ public class Ball extends GameObject{
     public Ball(float x, float y){
 
             super(x,y);
-
-            this.pos = new Vector2(x, y);
             this.bounds = new Circle(x, y, Radius);
 
     }
@@ -29,11 +26,11 @@ public class Ball extends GameObject{
     }
 
     public void setPos(Vector2 pos) {
-        this.pos = pos;
+        position = pos;
     }
 
     public Vector2 getPos(){
-        return pos;
+        return position;
     }
 
 
