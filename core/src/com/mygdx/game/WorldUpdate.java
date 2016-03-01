@@ -15,11 +15,13 @@ public class WorldUpdate {
     }
 
     public void update(float dt){
+
         updateBall(dt);
         updateObstacles(dt);
         updateSolids(dt);
     }
     private void updateBall(float dt){
+
         ball.update(dt);
     }
     private void updateObstacles(double dt){
