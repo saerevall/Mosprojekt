@@ -9,33 +9,32 @@ import com.badlogic.gdx.math.Circle;
 
 
 
-public class Ball extends GameObject {
+public class Ball extends DynamicGameObject {
 
-    public Vector2 velocity;
+
     public Vector2 acceleration;
-
     public final Circle bounds;
     public static final float RADIUS = 2;
 
 
 
-    public Ball(float x, float y){
+    public Ball(float posx, float posy, float velx, float vely){
 
-            super(x,y);
-            this.bounds = new Circle(x, y, RADIUS);
+            super(posx, posy, velx, vely);
+            this.bounds = new Circle(posx, posy, RADIUS);
 
 
     }
     public void update(float dt){
 
         velocity = new Vector2((acceleration.x + WorldUpdate.gravity.x)*dt, (acceleration.y + WorldUpdate.gravity.y)*dt);
-        position = new Vector2(velocity.x * dt, velocity.y * dt);
-
+        setPos(new Vector2(velocity.x * dt, velocity.y * dt));
 
     }
 
     public void setPos(Vector2 pos) {
         position = pos;
+        bounds.setPosition(position);
     }
 
 //    public void setAcc(Vector2 Acc) {
