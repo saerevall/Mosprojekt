@@ -6,16 +6,22 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Circle;
-public class Ball {
+
+public class Ball extends GameObject{
 
     //public final Vector2 vel;
     //public final Vector2 accel;
     public Vector2 pos;
     public final Circle bounds;
-    public Ball(float y, float x, float rad){
+    public static final float Radius = 2;
+
+
+    public Ball(float x, float y){
+
+            super(x,y);
 
             this.pos = new Vector2(x, y);
-            this.bounds = new Circle(x, y, rad);
+            this.bounds = new Circle(x, y, Radius);
 
     }
     public void update(float dt){
