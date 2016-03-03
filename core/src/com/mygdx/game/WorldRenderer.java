@@ -16,15 +16,20 @@ public class WorldRenderer {
     static final float FRUSTUM_HEIGHT = 15;
     OrthographicCamera cam;
 
+
     public WorldRenderer(WorldUpdate update, SpriteBatch batch){
         this.update = update;
         this.batch = batch;
+        this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
+        this.cam.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
     }
 
     public void render(){
 
         renderBackground();
         renderObjects();
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
 
     }
 

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Camera;
 
 /**
@@ -18,8 +19,11 @@ public class GameScreen extends ScreenAdapter {
     Ballgame game;
     WorldRenderer renderer;
     WorldUpdate update;
-    Vector3 touchDown, touchUp, result;
+    Vector3 touchDown, touchUp, result, camPos;
     Vector2 newPos, oldPos, diffPos;
+    OrthographicCamera cam;
+
+
     public GameScreen(Ballgame game) {
 
         this.game = game;
@@ -28,13 +32,22 @@ public class GameScreen extends ScreenAdapter {
         result = new Vector3();
         touchDown = new Vector3();
         touchUp = new Vector3();
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        //cam.position.set(320 / 2, 480 / 2, 0);
+        camPos = cam.position;
     }
     public void render(float delta) {
 
+        cam.position.set(0 + camPos.x, camPos.y, 0);
+        camPos = cam.position;
         update(delta);
         draw();
     }
     private void draw(){
+
+        cam.update();
+        game.batch.setProjectionMatrix(cam.combined);
         renderer.render();
     }
     private void update(float delta){
@@ -53,10 +66,8 @@ public class GameScreen extends ScreenAdapter {
                 touchUp.set(x, Gdx.graphics.getHeight() - y, 0);
                 result = touchUp.sub(touchDown);
                 diffPos = new Vector2(result.x, result.y);
-                oldPos = update.ball.getPos();
-                newPos = oldPos.add(diffPos);
-                update.ball.setPos(newPos);
-
+                update.ball.setVelocity(new Vector2(0,0));
+                update.ball.setAcceleration(diffPos);
                 return true; // return true to indicate the event was handled
             }
 
