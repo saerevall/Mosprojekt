@@ -39,7 +39,7 @@ public class GameScreen extends ScreenAdapter {
     }
     public void render(float delta) {
 
-        cam.position.set(5 + camPos.x, camPos.y, 0);
+        cam.position.set(0 + camPos.x, camPos.y, 0);
         camPos = cam.position;
         update(delta);
         draw();
@@ -66,10 +66,8 @@ public class GameScreen extends ScreenAdapter {
                 touchUp.set(x, Gdx.graphics.getHeight() - y, 0);
                 result = touchUp.sub(touchDown);
                 diffPos = new Vector2(result.x, result.y);
-                oldPos = update.ball.getPos();
-                newPos = oldPos.add(diffPos);
-                update.ball.setPos(newPos);
-
+                update.ball.setVelocity(new Vector2(0,0));
+                update.ball.setAcceleration(diffPos);
                 return true; // return true to indicate the event was handled
             }
 

@@ -8,15 +8,10 @@ import com.badlogic.gdx.math.Vector2;
 public class WorldUpdate {
 
     public final Ball ball;
-<<<<<<< HEAD
-    public static final Vector2 gravity;
-=======
-    public static final Vector2 gravity = new Vector2(0,-10);
->>>>>>> a2c8ae2a98e2b75d1b7202fe81ae972ee925d4e2
+    public static final Vector2 gravity = new Vector2(0, -1);
 
     public WorldUpdate(){
-        this.ball = new Ball(0,0,2);
-        gravity = new Vector2(0, 0);
+        this.ball = new Ball(300,300,0,0);
     }
 
     public void update(float dt){
