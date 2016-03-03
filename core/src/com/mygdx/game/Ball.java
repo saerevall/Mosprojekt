@@ -15,6 +15,21 @@ public class Ball extends DynamicGameObject {
 
     public Vector2 acceleration = new Vector2(0,0);
     public final Circle bounds;
+
+    public static final int BALL_STATE_YOLO = 0;
+
+    int state;
+    float stateTime;
+
+    /*public Ball(float y, float x, float rad) {
+
+        state = BALL_STATE_YOLO;
+        stateTime = 0.0f;
+        this.position = new Vector2(x, y);
+        this.bounds = new Circle(x, y, rad);
+    }*/
+
+
     public static final float FORCE = 100000;
     public static final float RADIUS = 2;
     public static final float MAX_VELOCITY_X = 1000;
@@ -24,14 +39,22 @@ public class Ball extends DynamicGameObject {
 
 
 
+
     public Ball(float posx, float posy, float velx, float vely){
 
             super(posx, posy, velx, vely);
+            state = BALL_STATE_YOLO;
+            stateTime = 0.0f;
+
             this.bounds = new Circle(posx, posy, RADIUS);
 
 
     }
     public void update(float dt){
+
+
+        stateTime += dt;
+
 
         updateAcceleration();
 
@@ -50,6 +73,7 @@ public class Ball extends DynamicGameObject {
             velocity.y = -MAX_VELOCITY_Y;
 
         setPos(new Vector2((velocity.x * dt) + position.x, (velocity.y * dt) + position.y));
+
 
         bounds.set(position.x,position.y,6.5f);
 
@@ -98,7 +122,9 @@ public class Ball extends DynamicGameObject {
         velocity = velo;
     }
 
+
     public Circle getBounds() {
+
 
         return bounds;
     }
