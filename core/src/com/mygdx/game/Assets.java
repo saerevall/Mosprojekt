@@ -1,21 +1,17 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.Gdx;
-
-/**
- * Created by Cricka on 2/25/2016.
- */
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 
 public class Assets {
 
-    public static Texture ball;
+    public static Texture items;
     public static Texture background;
+    public static Animation ball;
 
     private static Texture loadTexture (String file) {
         return new Texture(Gdx.files.internal(file));
@@ -23,8 +19,10 @@ public class Assets {
 
     public static void load(){
 
-        background = loadTexture("love.jpg");
-        ball = loadTexture("badlogic.jpg");
+        items = loadTexture("items.png");
+        background = loadTexture("Background.png");
+        ball = new Animation(0.2f, new TextureRegion(items, 0, 0, items.getHeight(), items.getHeight()), new TextureRegion(items, items.getHeight(), 0, items.getHeight(), items.getHeight()), new TextureRegion(items, items.getHeight()*2, 0, items.getHeight(), items.getHeight()));
+
 
     }
 }

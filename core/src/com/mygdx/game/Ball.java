@@ -12,13 +12,22 @@ public class Ball {
     //public final Vector2 accel;
     public Vector2 pos;
     public final Circle bounds;
+    public static final int BALL_STATE_YOLO = 0;
+
+    int state;
+    float stateTime;
+
     public Ball(float y, float x, float rad){
 
+            state = BALL_STATE_YOLO;
+            stateTime = 0.0f;
             this.pos = new Vector2(x, y);
             this.bounds = new Circle(x, y, rad);
 
     }
     public void update(float dt){
+
+        stateTime += dt;
 
     }
 
