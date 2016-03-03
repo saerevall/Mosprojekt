@@ -8,10 +8,12 @@ import com.badlogic.gdx.math.Vector2;
 public class WorldUpdate {
 
     public final Ball ball;
+    public final Floor floor;
     public static final Vector2 gravity = new Vector2(0, -1);
 
     public WorldUpdate(){
         this.ball = new Ball(300,300,0,0);
+        this.floor = new Floor( 0, 0, 1920, 20);
     }
 
     public void update(float dt){
@@ -24,11 +26,13 @@ public class WorldUpdate {
 
         ball.update(dt);
     }
-    private void updateObstacles(double dt){
+    private void updateObstacles(float dt){
 
     }
 
-    private void updateSolids(double dt){
+    private void updateSolids(float dt){
+
+        floor.update(dt);
 
     }
 }

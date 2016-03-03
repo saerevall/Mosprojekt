@@ -24,9 +24,6 @@ public class Ball extends DynamicGameObject {
 
 
 
-
-
-
     public Ball(float posx, float posy, float velx, float vely){
 
             super(posx, posy, velx, vely);
@@ -53,6 +50,8 @@ public class Ball extends DynamicGameObject {
             velocity.y = -MAX_VELOCITY_Y;
 
         setPos(new Vector2((velocity.x * dt) + position.x, (velocity.y * dt) + position.y));
+
+        bounds.set(position.x,position.y,6.5f);
 
     }
 
@@ -99,4 +98,8 @@ public class Ball extends DynamicGameObject {
         velocity = velo;
     }
 
+    public Circle getBounds() {
+
+        return bounds;
+    }
 }

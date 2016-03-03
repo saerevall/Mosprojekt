@@ -3,9 +3,12 @@ package com.mygdx.game;
 /**
  * Created by Cricka on 2/23/2016.
  */
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+
+
 public class WorldRenderer {
 
     static final float FRUSTUM_WIDTH = 10;
@@ -13,6 +16,7 @@ public class WorldRenderer {
     WorldUpdate update;
     SpriteBatch batch;
     OrthographicCamera cam;
+
     public WorldRenderer(WorldUpdate update, SpriteBatch batch){
         this.update = update;
         this.batch = batch;
@@ -26,6 +30,9 @@ public class WorldRenderer {
         renderObjects();
         cam.update();
         batch.setProjectionMatrix(cam.combined);
+
+        
+
 
     }
 
@@ -49,6 +56,11 @@ public class WorldRenderer {
 
     }
     private void renderSolids() {
+
+        Vector2 pos = update.floor.getPos();
+        batch.begin();
+        batch.draw(Assets.ball, pos.x, pos.y, 2000+pos.x, 20);
+        batch.end();
 
     }
 }
