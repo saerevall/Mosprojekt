@@ -11,6 +11,7 @@ public class Assets {
 
     public static Texture items;
     public static Texture background;
+    public static Texture BadLogic;
     public static Animation ball;
 
     private static Texture loadTexture (String file) {
@@ -20,6 +21,8 @@ public class Assets {
     public static void load(){
 
         items = loadTexture("items.png");
+
+        BadLogic = loadTexture("badlogic.jpg");
         background = loadTexture("Background.png");
         ball = new Animation(0.2f, new TextureRegion(items, 0, 0, items.getHeight(), items.getHeight()), new TextureRegion(items, items.getHeight(), 0, items.getHeight(), items.getHeight()), new TextureRegion(items, items.getHeight()*2, 0, items.getHeight(), items.getHeight()));
 
