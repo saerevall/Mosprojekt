@@ -39,9 +39,9 @@ public class WorldRenderer {
     }
 
     private void renderBall() {
-        Vector2 pos = update.ball.getPos();
+        //Vector2 pos = update.ball.getPos();
         batch.begin();
-        batch.draw(Assets.ball ,pos.x, pos.y);
+        batch.draw(Assets.ball ,update.ballBody.getPosition().x, update.ballBody.getPosition().y);
         batch.end();
     }
 

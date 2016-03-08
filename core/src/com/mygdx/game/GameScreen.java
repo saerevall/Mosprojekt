@@ -36,7 +36,7 @@ public class GameScreen extends ScreenAdapter {
         cam = new OrthographicCamera();
         cam.setToOrtho(false);
 
-        //cam.position.set(320 / 2, 480 / 2, 0);
+
         camPos = cam.position;
     }
     public void render(float delta) {
@@ -69,7 +69,7 @@ public class GameScreen extends ScreenAdapter {
                 touchUp.set(x, Gdx.graphics.getHeight() - y, 0);
                 result = touchUp.sub(touchDown);
                 diffPos = new Vector2(result.x, result.y);
-                update.ball.setVelocity(diffPos);
+
                 return true; // return true to indicate the event was handled
             }
 
