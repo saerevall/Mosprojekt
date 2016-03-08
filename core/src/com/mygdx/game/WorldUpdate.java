@@ -34,11 +34,11 @@ public class WorldUpdate {
 
         //ball.update(dt);
     }
-    private void updateObstacles(double dt){
+    private void updateObstacles(float dt){
 
     }
 
-    private void updateSolids(double dt){
+    private void updateSolids(float dt){
 
     }
 }
