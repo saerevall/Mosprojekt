@@ -4,13 +4,10 @@ package com.mygdx.game;
  * Created by Cricka on 2/23/2016.
  */
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 
 
 public class WorldRenderer {
@@ -51,30 +48,33 @@ public class WorldRenderer {
     }
 
     private void renderBall() {
-        TextureRegion keyFrame;
-        keyFrame = Assets.ball.getKeyFrame(update.ball.stateTime, true);
-        Vector2 pos = update.ball.getPos();
+
+        //Vector2 pos = update.ball.getPos();
         batch.begin();
-        batch.draw(keyFrame,pos.x, pos.y);
+        batch.draw(Assets.BadLogic, update.ballBody.getPosition().x, update.ballBody.getPosition().y);
+
         batch.end();
     }
 
     private void renderObstacles() {
 
         int len = update.cubes.size();
-        for (int i = 0; i < len; i++) {
-            Cube cube = update.cubes.get(i);
-            Texture keyFrame = Assets.cube;
 
-            batch.draw(keyFrame, cube.position.x - 1, cube.position.y - 0.25f, 2, 0.5f);
+            for (int i = 0; i < len; i++) {
+
+                batch.begin();
+                batch.draw(Assets.cube, update.cubes.get(i).getPosition().x, update.cubes.get(i).getPosition().y);
+                batch.end();
+            }
         }
 
-    }
+
+
     private void renderSolids() {
 
-        Vector2 pos = update.floor.getPos();
+
         batch.begin();
-        batch.draw(Assets.BadLogic, pos.x, pos.y, 2000+pos.x, 20);
+        batch.draw(Assets.BadLogic, update.floorBody.getPosition().x, update.floorBody.getPosition().y, 2000+update.floorBody.getPosition().x, 20);
         batch.end();
 
     }

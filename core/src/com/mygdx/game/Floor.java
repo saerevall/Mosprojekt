@@ -1,43 +1,20 @@
 package com.mygdx.game;
 
-/**
- * Created by gabrielberthold on 16-03-03.
- */
-
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class Floor extends GameObject {
-
-    public final Rectangle bounds;
-
-
-    public Floor (float posx, float posy, float width, float height) {
-
-        super(posx, posy);
-        this.bounds = new Rectangle( posx, posy, width, height);
-
-
-    }
-
-    public void update(float dt){
-
-        updatePos();
-        bounds.set(position.x,position.y,1920,20);
-    }
-
-    public void updatePos(){
-
-        //position.x  = position.x;
-
-    }
-
-    public Vector2 getPos(){
-
-        return position;
-    }
-
-    public Rectangle getBounds() {
-        return bounds;
+/**
+ * Created by Cricka on 3/3/2016.
+ */
+public class Floor {
+    BodyDef floorBody;
+    PolygonShape floorShape;
+    public Floor(){
+        floorBody = new BodyDef();
+        floorBody.position.set(new Vector2(0, 10));
+        floorShape = new PolygonShape();
+        floorShape.setAsBox(Gdx.graphics.getWidth(), 10.0f);
     }
 }

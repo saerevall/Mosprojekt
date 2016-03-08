@@ -1,9 +1,10 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,67 +12,74 @@ import java.util.Random;
  */
 public class WorldUpdate {
 
+    public int rand;
+    int t ;
 
-    public static final float WORLD_WIDTH = 10;
-    public static final float WORLD_HEIGHT = 15 * 20;
+    Random randGenerate = new Random();
 
+
+    World world;
     public final Ball ball;
     public final Floor floor;
-
-    public final Random rand;
-
-    public final List<Cube> cubes;
-
-
-
-    public static final Vector2 gravity = new Vector2(0, -1);
-
-
+    Body ballBody, floorBody, cubeBody;
+    public static final Vector2 worldGravity = new Vector2(0, -10);
+    public ArrayList<Cube> cubes = new ArrayList<Cube>();
 
     public WorldUpdate(){
 
-        this.ball = new Ball(300,300,0,0);
-        this.floor = new Floor( 0, 0, 1920, 20);
 
-        rand = new Random();
-        cubes = new ArrayList<Cube>();
-        generateLevel();
+
+        world = new World(worldGravity, true);
+        this.ball = new Ball(300,300);
+        this.floor = new Floor();
+        ballBody = world.createBody(ball.circleBody);
+        floorBody = world.createBody(floor.floorBody);
+        Fixture fixtureBall = ballBody.createFixture(ball.circleDef);
+        floorBody.createFixture(floor.floorShape, 0.0f);
+
+
 
     }
 
-    private void generateLevel(){
+        private void generateCubes() {
 
-        float y = Cube.CUBE_DIMENSION / 2;
+            rand = randGenerate.nextInt(Gdx.graphics.getHeight());
 
-        while (y < WORLD_HEIGHT - WORLD_WIDTH / 2) {
+            Cube cube = new Cube(Gdx.graphics.getWidth()+20*t,rand);
 
-            int type = rand.nextFloat() > 0.5f ? Cube.CUBE_TYPE_NORMAL : null;
-            float x = rand.nextFloat() * (WORLD_WIDTH - Cube.CUBE_DIMENSION) + Cube.CUBE_DIMENSION / 2;
 
-            Cube cube = new Cube(type, x, y);
             cubes.add(cube);
-        }
+
+
+
+            for (int i = 0; i < cubes.size();i++) {
+
+                if(cubes.get(i).getPosition().x < GameScreen.){
+                    cubes.remove(i);
+                }
+
+
+            t++;
 
     }
 
     public void update(float dt){
-
+        world.step(dt, 6, 2);
         updateBall(dt);
         updateObstacles(dt);
         updateSolids(dt);
+
     }
     private void updateBall(float dt){
 
-        ball.update(dt);
+        //ball.update(dt);
     }
     private void updateObstacles(float dt){
-
+        generateCubes();
 
     }
 
     private void updateSolids(float dt){
-
-        floor.update(dt);
 
     }
 }

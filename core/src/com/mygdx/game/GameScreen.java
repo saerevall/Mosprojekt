@@ -23,6 +23,7 @@ public class GameScreen extends ScreenAdapter {
     Vector3 touchDown, touchUp, result, camPos;
     Vector2 newPos, oldPos, diffPos;
     OrthographicCamera cam;
+    float dt;
 
 
     public GameScreen(Ballgame game) {
@@ -35,13 +36,15 @@ public class GameScreen extends ScreenAdapter {
         touchUp = new Vector3();
         cam = new OrthographicCamera();
         cam.setToOrtho(false);
-        //cam.position.set(320 / 2, 480 / 2, 0);
+
+
         camPos = cam.position;
     }
     public void render(float delta) {
 
-        cam.position.set(camPos.x, camPos.y + 1, 0);
+        cam.position.set(camPos.x+5, camPos.y , 0);
         camPos = cam.position;
+        dt = delta;
         update(delta);
         draw();
     }
@@ -67,18 +70,13 @@ public class GameScreen extends ScreenAdapter {
                 touchUp.set(x, Gdx.graphics.getHeight() - y, 0);
                 result = touchUp.sub(touchDown);
                 diffPos = new Vector2(result.x, result.y);
-                update.ball.setVelocity(new Vector2(0,0));
-                update.ball.setAcceleration(diffPos);
+
                 return true; // return true to indicate the event was handled
             }
 
 
         });
-        /*if(Gdx.input.justTouched()){
-            tp.set(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY(), 0);
-            Vector2 boll = new Vector2(tp.x, tp.y);
-            update.ball.setPos(boll);
-        }*/
+
         update.update(delta);
     }
 }

@@ -1,33 +1,30 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+
 /**
  * Created by gabrielberthold on 16-03-03.
  */
-public class Cube extends GameObject{
+public class Cube {
 
-    public static final float CUBE_DIMENSION = 50;
+    BodyDef cubeBody;
+    PolygonShape cubeShape;
+    Vector2 Position;
 
-    public static final int CUBE_STATE_STATIC = 0;
+    public Cube(int posx, int posy){
 
-    public static final int CUBE_TYPE_NORMAL = 0;
-
-    int state;
-    int type;
-    float stateTime;
-
-
-    public Cube (int type, float posx, float posy){
-
-        super(posx,posy);
-
-        this.type = type;
-        this.state = CUBE_STATE_STATIC;
-        this.stateTime = 0;
-
+        Position = new Vector2(posx,posy);
+        cubeBody = new BodyDef();
+        cubeBody.position.set(new Vector2(posx, posy));
+        cubeShape = new PolygonShape();
+        cubeShape.setAsBox(10.0f, 10.0f);
     }
 
-    public void update (float deltaTime) {
+    public Vector2 getPosition() {
 
-        stateTime += deltaTime;
+        return Position;
     }
 }
