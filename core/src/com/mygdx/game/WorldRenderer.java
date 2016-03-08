@@ -4,28 +4,37 @@ package com.mygdx.game;
  * Created by Cricka on 2/23/2016.
  */
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-public class WorldRenderer {
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.graphics.Color;
+
+public class WorldRenderer extends ApplicationAdapter {
 
     static final float FRUSTUM_WIDTH = 10;
     static final float FRUSTUM_HEIGHT = 15;
     WorldUpdate update;
     SpriteBatch batch;
     OrthographicCamera cam;
+    ShapeRenderer shapeRenderer;
+    private Sprite sprite;
     public WorldRenderer(WorldUpdate update, SpriteBatch batch){
         this.update = update;
         this.batch = batch;
         this.cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
         this.cam.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
+        shapeRenderer = new ShapeRenderer();
     }
 
     public void render(){
-
+        batch.setProjectionMatrix(cam.combined);
         renderBackground();
         renderObjects();
         cam.update();
-        batch.setProjectionMatrix(cam.combined);
+
 
     }
 
@@ -40,9 +49,14 @@ public class WorldRenderer {
 
     private void renderBall() {
         //Vector2 pos = update.ball.getPos();
+       /*
         batch.begin();
-        batch.draw(Assets.ball ,update.ballBody.getPosition().x, update.ballBody.getPosition().y);
-        batch.end();
+        batch.draw(Assets.ball, update.ballBody.getPosition().x, update.ballBody.getPosition().y);
+        batch.end();*/
+        shapeRenderer.begin(ShapeType.Filled);
+        shapeRenderer.circle(update.ballBody.getPosition().x * update.PIXELS_TO_METERS, update.ballBody.getPosition().y*update.PIXELS_TO_METERS, update.PIXELS_TO_METERS);
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.end();
     }
 
     private void renderObstacles() {

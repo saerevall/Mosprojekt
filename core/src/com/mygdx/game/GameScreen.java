@@ -36,7 +36,6 @@ public class GameScreen extends ScreenAdapter {
         cam = new OrthographicCamera();
         cam.setToOrtho(false);
 
-
         camPos = cam.position;
     }
     public void render(float delta) {
@@ -54,28 +53,30 @@ public class GameScreen extends ScreenAdapter {
         renderer.render();
     }
     private void update(float delta){
+        inputProcessor();
+        update.update(delta);
+    }
+    private void inputProcessor(){
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
             public boolean touchDown (int x, int y, int pointer, int button) {
-                // your touch down code here
+
                 touchDown.set(x, Gdx.graphics.getHeight() - y, 0);
 
-                return true; // return true to indicate the event was handled
+                return true;
             }
 
             @Override
             public boolean touchUp (int x, int y, int pointer, int button) {
-                // your touch up code here
                 touchUp.set(x, Gdx.graphics.getHeight() - y, 0);
                 result = touchUp.sub(touchDown);
                 diffPos = new Vector2(result.x, result.y);
-
-                return true; // return true to indicate the event was handled
+                update.ballForce(diffPos);
+                return true;
             }
 
 
         });
 
-        update.update(delta);
     }
 }
