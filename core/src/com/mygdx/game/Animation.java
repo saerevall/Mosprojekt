@@ -22,7 +22,8 @@ public class Animation {
 
         if (mode == 0) {
             frameNumber = Math.min(keyFrames.length - 1, frameNumber);
-        } else {
+        }
+        else {
             frameNumber = frameNumber % keyFrames.length;
         }
         return keyFrames[frameNumber];

@@ -40,7 +40,7 @@ public class GameScreen extends ScreenAdapter {
     }
     public void render(float delta) {
 
-        cam.position.set(0 + camPos.x, camPos.y, 0);
+        cam.position.set(camPos.x, camPos.y + 1, 0);
         camPos = cam.position;
         update(delta);
         draw();

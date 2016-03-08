@@ -6,6 +6,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -59,6 +60,14 @@ public class WorldRenderer {
     }
 
     private void renderObstacles() {
+
+        int len = update.cubes.size();
+        for (int i = 0; i < len; i++) {
+            Cube cube = update.cubes.get(i);
+            Texture keyFrame = Assets.cube;
+
+            batch.draw(keyFrame, cube.position.x - 1, cube.position.y - 0.25f, 2, 0.5f);
+        }
 
     }
     private void renderSolids() {

@@ -12,6 +12,8 @@ public class Assets {
     public static Texture items;
     public static Texture background;
     public static Texture BadLogic;
+    public static Texture cube;
+
     public static Animation ball;
 
     private static Texture loadTexture (String file) {
@@ -21,6 +23,7 @@ public class Assets {
     public static void load(){
 
         items = loadTexture("items.png");
+        cube = loadTexture("cube.jpg");
 
         BadLogic = loadTexture("badlogic.jpg");
         background = loadTexture("Background.png");
