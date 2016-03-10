@@ -24,7 +24,6 @@ public class GameScreen extends ScreenAdapter {
     OrthographicCamera cam;
     float dt;
 
-
     public GameScreen(Ballgame game) {
 
         this.game = game;
@@ -35,9 +34,9 @@ public class GameScreen extends ScreenAdapter {
         touchUp = new Vector3();
         cam = new OrthographicCamera();
         cam.setToOrtho(false);
-
         camPos = cam.position;
     }
+
     public void render(float delta) {
 
         cam.position.set(0 + camPos.x, camPos.y, 0);
@@ -74,8 +73,6 @@ public class GameScreen extends ScreenAdapter {
                 update.ballForce(diffPos);
                 return true;
             }
-
-
         });
 
     }

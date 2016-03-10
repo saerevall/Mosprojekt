@@ -3,6 +3,7 @@ package com.mygdx.game;
 /**
  * Created by Cricka on 2/23/2016.
  */
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,7 +21,7 @@ public class WorldRenderer extends ApplicationAdapter {
     SpriteBatch batch;
     OrthographicCamera cam;
     ShapeRenderer shapeRenderer;
-    private Sprite sprite;
+
     public WorldRenderer(WorldUpdate update, SpriteBatch batch){
         this.update = update;
         this.batch = batch;
@@ -54,7 +55,7 @@ public class WorldRenderer extends ApplicationAdapter {
         batch.draw(Assets.ball, update.ballBody.getPosition().x, update.ballBody.getPosition().y);
         batch.end();*/
         shapeRenderer.begin(ShapeType.Filled);
-        shapeRenderer.circle(update.ballBody.getPosition().x * update.PIXELS_TO_METERS, update.ballBody.getPosition().y*update.PIXELS_TO_METERS, update.PIXELS_TO_METERS);
+        shapeRenderer.circle(update.ballBody.getPosition().x * update.PIXELS_TO_METERS, update.ballBody.getPosition().y * update.PIXELS_TO_METERS, update.PIXELS_TO_METERS);
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.end();
     }
@@ -64,5 +65,12 @@ public class WorldRenderer extends ApplicationAdapter {
     }
     private void renderSolids() {
 
+        shapeRenderer.begin(ShapeType.Filled);
+        shapeRenderer.rect(update.floorBody.getPosition().x, update.floorBody.getPosition().y * WorldUpdate.PIXELS_TO_METERS, Gdx.graphics.getWidth(), 20f);
+        shapeRenderer.rect(update.roofBody.getPosition().x, update.roofBody.getPosition().y * WorldUpdate.PIXELS_TO_METERS - 20f, Gdx.graphics.getWidth(), 20f);
+        shapeRenderer.rect(update.wallBody.getPosition().x * WorldUpdate.PIXELS_TO_METERS - 20, update.wallBody.getPosition().y, 20f, Gdx.graphics.getHeight());
+        shapeRenderer.setColor(Color.BLACK);
+
+        shapeRenderer.end();
     }
 }

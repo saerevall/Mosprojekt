@@ -11,8 +11,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
-import java.lang.Math;
-
 
 public class Ball {
 
@@ -24,7 +22,6 @@ public class Ball {
 
     public Ball(float posx, float posy){
 
-
             circleBody = new BodyDef();
             circleBody.type = BodyDef.BodyType.DynamicBody;
             circleBody.position.set(posx/PIXELS_TO_METERS, posy/PIXELS_TO_METERS);
@@ -34,7 +31,6 @@ public class Ball {
             circleDef.density = 0.5f;
             circleDef.restitution = 0.8f;
             circleDef.shape = circle;
-
 
     }
 

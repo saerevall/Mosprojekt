@@ -10,10 +10,13 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
  */
 
 public class Floor {
+
     BodyDef floorBody;
     PolygonShape floorShape;
     public static final float PIXELS_TO_METERS = 100f;
+
     public Floor(float _shapex,float _shapey, Vector2 pos){
+
         floorBody = new BodyDef();
         floorBody.position.set(pos.scl(1/PIXELS_TO_METERS));
         floorShape = new PolygonShape();
