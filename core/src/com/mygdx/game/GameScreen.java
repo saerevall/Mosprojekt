@@ -77,6 +77,6 @@ public class GameScreen extends ScreenAdapter {
 
         });
 
-        update.update(delta);
+        update.update(delta,camPos);
     }
 }

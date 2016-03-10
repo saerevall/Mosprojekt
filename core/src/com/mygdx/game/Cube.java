@@ -16,11 +16,11 @@ public class Cube {
 
     public Cube(int posx, int posy){
 
-        Position = new Vector2(posx,posy);
+        Position = new Vector2(posx/100,posy/100);
         cubeBody = new BodyDef();
-        cubeBody.position.set(new Vector2(posx, posy));
+        cubeBody.position.set(new Vector2(posx/100, posy/100));
         cubeShape = new PolygonShape();
-        cubeShape.setAsBox(10.0f, 10.0f);
+        cubeShape.setAsBox(1.0f, 1.0f);
     }
 
     public Vector2 getPosition() {

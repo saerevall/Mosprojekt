@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class WorldUpdate {
     Body ballBody, floorBody, cubeBody;
     public static final Vector2 worldGravity = new Vector2(0, -10);
     public ArrayList<Cube> cubes = new ArrayList<Cube>();
+    private Vector3 camPos;
+
 
     public WorldUpdate(){
 
@@ -43,31 +46,31 @@ public class WorldUpdate {
 
         private void generateCubes() {
 
-            rand = randGenerate.nextInt(Gdx.graphics.getHeight());
+            if (t%25==0) {
 
-            Cube cube = new Cube(Gdx.graphics.getWidth()+20*t,rand);
+                rand = randGenerate.nextInt(Gdx.graphics.getHeight()-20) + 20;
 
+                Cube cube = new Cube(Gdx.graphics.getWidth() + 5 * t, rand);
 
-            cubes.add(cube);
-
-
-
-            for (int i = 0; i < cubes.size();i++) {
-
-                if(cubes.get(i).getPosition().x < GameScreen.){
-                    cubes.remove(i);
+                if (cubes.size() > 15) {
+                    cubes.remove(0);
                 }
+                Gdx.app.log("" + camPos, "Kamera pos");
 
+                cubes.add(cube);
+
+            }
 
             t++;
 
     }
 
-    public void update(float dt){
+    public void update(float dt, Vector3 camPos){
         world.step(dt, 6, 2);
         updateBall(dt);
         updateObstacles(dt);
         updateSolids(dt);
+        this.camPos = camPos;
 
     }
     private void updateBall(float dt){

@@ -63,7 +63,7 @@ public class WorldRenderer {
             for (int i = 0; i < len; i++) {
 
                 batch.begin();
-                batch.draw(Assets.cube, update.cubes.get(i).getPosition().x, update.cubes.get(i).getPosition().y);
+                batch.draw(Assets.cube, update.cubes.get(i).getPosition().x*100, update.cubes.get(i).getPosition().y*100);
                 batch.end();
             }
         }
