@@ -62,7 +62,15 @@ public class WorldRenderer extends ApplicationAdapter {
 
     private void renderObstacles() {
 
+        shapeRenderer.begin(ShapeType.Filled);
+        for (int i = 0; i < WorldUpdate.BOXES; i++)
+        {
+            shapeRenderer.rect(update.boxesBody[i].getPosition().x * WorldUpdate.PIXELS_TO_METERS,update.boxesBody[i].getPosition().y * WorldUpdate.PIXELS_TO_METERS, update.boxes[i].x,update.boxes[i].y );
+        }
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.end();
     }
+
     private void renderSolids() {
 
         shapeRenderer.begin(ShapeType.Filled);
