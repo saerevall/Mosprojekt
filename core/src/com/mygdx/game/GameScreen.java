@@ -58,7 +58,7 @@ public class GameScreen extends ScreenAdapter {
     private void inputProcessor(){
         Gdx.input.setInputProcessor(new InputAdapter() {
             @Override
-            public boolean touchDown (int x, int y, int pointer, int button) {
+            public boolean touchDown(int x, int y, int pointer, int button) {
 
                 touchDown.set(x, Gdx.graphics.getHeight() - y, 0);
 
@@ -66,7 +66,7 @@ public class GameScreen extends ScreenAdapter {
             }
 
             @Override
-            public boolean touchUp (int x, int y, int pointer, int button) {
+            public boolean touchUp(int x, int y, int pointer, int button) {
                 touchUp.set(x, Gdx.graphics.getHeight() - y, 0);
                 result = touchUp.sub(touchDown);
                 diffPos = new Vector2(result.x, result.y);
@@ -74,6 +74,7 @@ public class GameScreen extends ScreenAdapter {
                 return true;
             }
         });
+
 
     }
 }

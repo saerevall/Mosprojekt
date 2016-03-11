@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.*;
 
 import java.util.Random;
 
+
 /**
  * Created by Cricka on 2/23/2016.
  */
@@ -20,7 +21,7 @@ public class WorldUpdate {
     public final Box wall;
     Body ballBody, floorBody, roofBody, wallBody;
     Body[] boxesBody;
-    public static Vector2 worldGravity = new Vector2(0, -10);
+    public static Vector2 worldGravity = new Vector2(0, -9.82f);
     public static final float FORCE = 10f;
     public static final float PIXELS_TO_METERS = 100f;
     public static final int BOXES = 5;
@@ -28,7 +29,7 @@ public class WorldUpdate {
     public WorldUpdate(){
 
         rand = new Random();
-        world = new World(worldGravity, true);
+        world = new World(new Vector2(0f, 0f), true);
         boxes = new Box[BOXES];
         boxesBody = new Body[BOXES];
         ball = new Ball(300,300);
@@ -55,7 +56,34 @@ public class WorldUpdate {
     }
 
     public void update(float dt){
-        world.step(1 / 45f, 6, 2);
+        world.step(1/60f, 6, 2);
+        world.setContactListener(new ContactListener() {
+
+            @Override
+            public void beginContact(Contact contact) {
+                Fixture fixtureA = contact.getFixtureA();
+                Fixture fixtureB = contact.getFixtureB();
+                Gdx.app.log("beginContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+                ball.vel.y = -ball.vel.y * 0.95f;
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+                Fixture fixtureA = contact.getFixtureA();
+                Fixture fixtureB = contact.getFixtureB();
+                Gdx.app.log("endContact", "between " + fixtureA.toString() + " and " + fixtureB.toString());
+
+            }
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {
+            }
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {
+            }
+
+        });
         updateBall(dt);
         updateObstacles(dt);
         updateSolids(dt);
@@ -63,9 +91,13 @@ public class WorldUpdate {
 
     private void updateBall(float dt){
 
-        //ball.update(dt);
-    }
+       //ball.circleBody.position.set(30, 30);
+        ball.update(dt);
+        Vector2 newPos = new Vector2(ballBody.getPosition().x + (ball.vel.x * dt), ballBody.getPosition().y + (ball.vel.y * dt));
+        Gdx.app.log("Suge mig röv", "x :" + ball.vel.x + "y :" + ball.vel.y);
+        ballBody.setTransform(newPos.x, newPos.y, 0);
 
+    }
     private void updateObstacles(double dt){
 
     }
@@ -78,8 +110,7 @@ public class WorldUpdate {
 
         Force = Force.nor().scl(FORCE);
         Gdx.app.log("Suge mig röv", "x :" + Force.x + " y :" + Force.y);
-
-        ballBody.applyLinearImpulse(Force, ballBody.getWorldCenter(), true);
+        ball.vel = ball.vel.add(Force);
     }
 
 }

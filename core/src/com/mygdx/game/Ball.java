@@ -19,6 +19,9 @@ public class Ball {
     FixtureDef circleDef;
     public static final float RADIUS = 1;
     public static final float PIXELS_TO_METERS = 100f;
+    public Vector2 acc = new Vector2(0f, 0f);
+    public final static float MAX_VELOCITY = 50f;
+    public Vector2 vel = new Vector2(0f, 0f);
 
     public Ball(float posx, float posy){
 
@@ -31,8 +34,13 @@ public class Ball {
             circleDef.density = 0.5f;
             circleDef.restitution = 0.8f;
             circleDef.shape = circle;
+            vel.limit(30);
 
     }
+    public void update(float dt){
 
+        vel.y = (acc.y + WorldUpdate.worldGravity.y) * dt + vel.y;
+
+    }
 
 }
