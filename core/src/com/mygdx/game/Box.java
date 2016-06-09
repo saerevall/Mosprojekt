@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.sun.xml.internal.ws.wsdl.writer.document.soap12.Body;
+
 
 /**
  * Created by Cricka on 3/3/2016.
@@ -27,6 +27,7 @@ public class Box {
         y = lengthY;
         boxBody = new BodyDef();
         boxBody.position.set(position.scl(1/PIXELS_TO_METERS));
+
         boxShape = new PolygonShape();
         boxShape.setAsBox(x / PIXELS_TO_METERS, y / PIXELS_TO_METERS);
 
