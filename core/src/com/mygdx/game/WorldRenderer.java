@@ -5,18 +5,19 @@ package com.mygdx.game;
  */
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Color;
 
+import java.util.Random;
+
 public class WorldRenderer extends ApplicationAdapter {
 
     static final float FRUSTUM_WIDTH = 10;
     static final float FRUSTUM_HEIGHT = 15;
+    Random rand = new Random();
     WorldUpdate update;
     SpriteBatch batch;
     OrthographicCamera cam;
@@ -65,7 +66,11 @@ public class WorldRenderer extends ApplicationAdapter {
         shapeRenderer.begin(ShapeType.Filled);
         for (int i = 0; i < WorldUpdate.BOXES; i++)
         {
-            shapeRenderer.rect(update.boxesBody[i].getPosition().x * WorldUpdate.PIXELS_TO_METERS,update.boxesBody[i].getPosition().y * WorldUpdate.PIXELS_TO_METERS, update.boxes[i].x,update.boxes[i].y );
+            shapeRenderer.rect(update.boxRoofBody[i].getPosition().x * WorldUpdate.PIXELS_TO_METERS,update.boxRoofBody[i].getPosition().y * WorldUpdate.PIXELS_TO_METERS, update.roofboxes[i].x,update.roofboxes[i].y );
+            shapeRenderer.rect(update.boxFloorBody[i].getPosition().x * WorldUpdate.PIXELS_TO_METERS,update.boxFloorBody[i].getPosition().y * WorldUpdate.PIXELS_TO_METERS, update.floorboxes[i].x,update.floorboxes[i].y );
+            shapeRenderer.rect(update.boxRightBody[i].getPosition().x * WorldUpdate.PIXELS_TO_METERS,update.boxRightBody[i].getPosition().y * WorldUpdate.PIXELS_TO_METERS, update.rightboxes[i].x,update.rightboxes[i].y );
+            shapeRenderer.rect(update.boxLeftBody[i].getPosition().x * WorldUpdate.PIXELS_TO_METERS,update.boxLeftBody[i].getPosition().y * WorldUpdate.PIXELS_TO_METERS, update.leftboxes[i].x,update.leftboxes[i].y );
+
         }
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.end();
@@ -76,7 +81,8 @@ public class WorldRenderer extends ApplicationAdapter {
         shapeRenderer.begin(ShapeType.Filled);
         shapeRenderer.rect(update.floorBody.getPosition().x, update.floorBody.getPosition().y * WorldUpdate.PIXELS_TO_METERS, Gdx.graphics.getWidth(), 20f);
         shapeRenderer.rect(update.roofBody.getPosition().x, update.roofBody.getPosition().y * WorldUpdate.PIXELS_TO_METERS - 20f, Gdx.graphics.getWidth(), 20f);
-        shapeRenderer.rect(update.wallBody.getPosition().x * WorldUpdate.PIXELS_TO_METERS - 20, update.wallBody.getPosition().y, 20f, Gdx.graphics.getHeight());
+        shapeRenderer.rect(update.rwallBody.getPosition().x * WorldUpdate.PIXELS_TO_METERS - 20, update.rwallBody.getPosition().y, 20f, Gdx.graphics.getHeight());
+        shapeRenderer.rect(update.lwallBody.getPosition().x * WorldUpdate.PIXELS_TO_METERS - 20, update.lwallBody.getPosition().y, 20f, Gdx.graphics.getHeight());
         shapeRenderer.setColor(Color.BLACK);
 
         shapeRenderer.end();
